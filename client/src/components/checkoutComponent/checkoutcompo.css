@@ -1,0 +1,152 @@
+.checkout-main {
+    width: inherit;
+    min-height: 100vh;
+    background-color: rgb(239, 239, 239);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.checkout-info {
+    width: calc(100vw - 40px);
+    min-height: 65vh;
+    background-color: white;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 20px;
+    font-size: 13px;
+}
+
+.checkout-price {
+    width: calc(100vw - 40px);
+    min-height: 40vh;
+    background-color: white;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    font-size: 13px;
+    padding-bottom: 20px;
+}
+
+.checkout-info-details-flight img {
+    height: 40px;
+    width: 70px;
+}
+
+.checkout-info-details-flight-time {
+    line-height: 1.6;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.checkout-bag li {
+    color: gray;
+    line-height: 1.6;
+}
+
+.checkout-price-travelers {
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.8;
+    color: rgb(25, 25, 25);
+}
+
+.checkout-price-traveler {
+    width: inherit;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px 0 5px 0;
+}
+
+.checkout-price-total {
+    font-size: 14px;
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 0 10px 0;
+}
+
+hr {
+    width: 100%;
+}
+
+.checkout-button {
+    width: 60vw;
+    height: 30px;
+    border: none;
+    border-radius: 25px;
+    background-color: blue;
+    color: white;
+    font-weight: 600;
+}
+
+@media screen and (min-width: 768px){
+    .checkout-main {
+        width: inherit;
+        min-height: 95vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .checkout-info {
+        width: 70vw;
+        height: 40vh;
+        padding-bottom: 30px;
+        font-size: 14px;
+    }
+    .checkout-price {
+        width: 60vw;
+        min-height: 30vh;
+        font-size: 14px;
+    }
+    .checkout-price-travelers {
+        width: 30vw;
+    }
+    .checkout-button {
+        width: 30vw;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    .checkout-info {
+        width: 30vw;
+        min-height: 75vh;
+        font-size: 15px;
+        padding: 30px;
+    }
+    .checkout-price {
+        width: 30vw;
+        padding: 20px;
+    }
+    .checkout-price-travelers {
+        width: 25vw;
+    }
+    .checkout-price-traveler {
+        line-height: 2;
+    }
+    .checkout-price-total {
+        padding: 20px 0 20px 0;
+    }
+    .checkout-button {
+        width: 25vw;
+        height: 40px;
+    }
+    .checkout-info-details-flight img {
+        height: 65px;
+        width: 110px;
+    }
+}

@@ -1,0 +1,169 @@
+.payment-main {
+    width: inherit;
+    min-height: 100vh;
+    background-color: rgb(239, 239, 239);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 20px
+}
+
+.payment-pricelist {
+    width: calc(100% - 40px);
+    min-height: 30vh;
+    background-color: white;
+    padding: 15px;
+    line-height: 1.7;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 25px;
+}
+
+.payment-list {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.payment-list-item {
+    width: inherit;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.payment-travelers {
+    width: calc(100% - 40px);
+    min-height: 30vh;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+}
+
+.payment-traveler {
+    width: 100%;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 2;
+}
+
+.payment-traveler-name {
+    width: inherit;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-input {
+    width: 80%;
+    border: 0.5px solid gray;
+    height: 35px;
+    border-radius: 5px;
+    margin-bottom: 7px;
+    padding: 5px;
+    box-shadow: -1px 1px 1px gray;
+}
+
+label {
+    font-weight: 600;
+    color: rgb(50, 50, 50);
+    font-size: 14px;
+}
+
+.payment-card {
+    width: calc(100% - 40px);
+    height: 54vh;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+}
+
+.payment-card-info {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.8;
+}
+
+.payment-card-info-date {
+    display: flex;
+    flex-direction: row;
+
+}
+
+img {
+    height: 50px;
+    width: 100px;
+}
+
+.payment-traveler-gender {
+    width: inherit;
+    height: auto;
+}
+
+.payment-traveler-gender input {
+    height: 13px;
+    width: 20px;
+}
+
+.payment-traveler-gender label {
+    margin-right:  15px;
+}
+
+.payment-button {
+    width: calc(100% - 40px);
+    border: none;
+    height: 35px;
+    background-color: blue;
+    color: white;
+    font-weight: 600;
+    border-radius: 25px;
+}
+
+@media screen and (min-width: 768px){
+    .payment-pricelist {
+        width: 70vw;
+    }
+    .payment-travelers {
+        width: 70vw;
+    }
+    .payment-card {
+        width: 70vw;
+    }
+    .payment-button {
+        width: 70vw;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .payment-pricelist {
+        width: 50vw;
+    }
+    .payment-travelers {
+        width: 50vw;
+        padding: 30px;
+    }
+    .payment-card {
+        width: 50vw;
+        height: 52vh;
+    }
+    .payment-button {
+        width: 50vw;
+        height: 40px;
+    }
+    .payment-input {
+        margin-bottom: 10px;
+    }
+}

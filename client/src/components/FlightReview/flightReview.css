@@ -1,0 +1,89 @@
+.flight_review_main {
+    width: 100%;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(243, 243, 243);
+}
+
+.flight_review_main h3 {
+    padding: 10px 0 10px 0;
+}
+
+.flight_review_container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 500px;
+    background-color: white;
+    border: 1px solid rgb(183, 183, 183);
+    border-radius: 10px;
+    padding: 10px 0 0 20px;
+}
+
+.flight_review_container img {
+    width: 100px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.flight_review_compo {
+    width: 94%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    font-size: 15px;
+}
+
+.flight_review_compo h4 {
+    padding-bottom: 10px;
+}
+
+.flight_review_compo ul {
+    list-style-type: none;
+    padding-bottom: 20px;
+}
+
+.flight_review_compo li {
+    padding-bottom: 5px;
+}
+
+.flight_review_compo p {
+    padding: 1px 0 8px 0;
+}
+
+.flight_review_compo button {
+    border: none;
+    background-color: blue;
+    padding: 7px 0 7px 0;
+    border-radius: 25px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.flight_review_compo button:hover {
+    background-color: rgb(0, 0, 226);
+}
+
+small {
+    font-size: 11px;
+    color: rgb(74, 74, 74);
+}
+
+@media screen and (min-width: 768px) {
+    .flight_review_main h3 {
+        padding: 15px 0 15px 0;
+    }
+    .flight_review_container {
+        width: 60%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .flight_review_container {
+        width: 35%;
+    }
+}
