@@ -17,11 +17,10 @@ export const searchFlight = async(req, res) => {
     const { origin, destination, date, seats, category } = req.params;
     
     try {
-        
-        const flightsArr = await flights.find({ "origin.city": origin, "destination.city": destination, "origin.date": date, "economy.seats": { $gte: seats } });
+        const flightsArr = await flights.find({ "origin.city": origin, "destination.city": destination, "origin.date": date, "seats": {$gte: seats} });
         res.status(200).json(flightsArr);
         if (category === "business") {
-            const flightsArr = await flights.find({ "origin.city": origin, "destination.city": destination, "origin.date": date, "business.seats": { $gte: seats } });
+            const flightsArr = await flights.find({ "origin.city": origin, "destination.city": destination, "origin.date": date, "seats": { $gte: seats } });
             res.status(200).json(flightsArr);
         }
 

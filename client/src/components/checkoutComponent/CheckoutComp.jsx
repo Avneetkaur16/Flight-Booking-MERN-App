@@ -1,28 +1,60 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './checkoutcompo.css';
-import AmericanAirlinesLogo from '../../assets/AmericanAirlinesLogo.png'
+import { SeatsContext } from '../../context/SeatsContext';
+import { SelectedFlightContext } from '../../context/SelectedFlightContext';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutComp = () => {
+
+    const month = {
+        1: 'Jan',
+        2: 'Feb',
+        3: 'Mar',
+        4: 'Apr',
+        5: 'May',
+        6: 'Jun',
+        7: 'Jul',
+        8: 'Aug',
+        9: 'Sep',
+        10: 'Oct',
+        11: 'Nov',
+        12: 'Dec'
+    }
+
+    const navigate = useNavigate();
+
+    const { seats } = useContext(SeatsContext);
+    const { selectedFlight } = useContext(SelectedFlightContext);
+
+    const total = seats * selectedFlight?.economy?.cost;
+
+    const date = selectedFlight?.origin?.date.slice(8, 10);
+    const monthNum = selectedFlight?.origin?.date.slice(5, 7);
+    const year = selectedFlight?.origin?.date.slice(0, 4);
+
+    console.log(selectedFlight);
+    console.log(month[monthNum]);
+    
   return (
     <div className='checkout-main'>
         <div className='checkout-info'>
-            <h2 className='checkout-info-header'>Dallas to San Francisco</h2>
+            <h2 className='checkout-info-header'>{selectedFlight?.origin?.city} to {selectedFlight?.destination?.city}</h2>
             <div className='checkout-info-details'>
-                <p style={{ color: 'gray' }}>4:53pm - 6:53pm</p>
+                <p style={{ color: 'gray' }}>{selectedFlight?.origin?.time} - {selectedFlight?.destination?.time}</p>
                 <div className='checkout-info-details-flight'>
-                    <img src={AmericanAirlinesLogo} alt='airlineLogo' />
-                    <p>Sat, Jan 20, 2023</p>
+                    <img src={selectedFlight?.airlineLogo} alt='airlineLogo' />
+                    <p>{month[monthNum]} {date}, {year}</p>
                 </div>
                 <br />
                 <div className='checkout-info-details-flight-time'>
-                    <h4>4:53pm - Dallas</h4>
-                    <p>Dallas-Fort Worth Intl. DFW</p>
-                    <p>American Airlines 2810</p>
+                    <h4>{selectedFlight?.origin?.time} - {selectedFlight?.origin?.city}</h4>
+                    <p>{selectedFlight?.origin?.airport} {selectedFlight?.origin?.code}</p>
+                    <p>{selectedFlight?.airline} {selectedFlight?.flightNumber}</p>
                     <p>Economy</p>
                     <br />
 
-                    <h4>6:53pm - San Francisco</h4>
-                    <p>San Francisco Intl. SFO</p>
+                    <h4>{selectedFlight?.destination?.time} - {selectedFlight?.destination?.city}</h4>
+                    <p>{selectedFlight?.destination?.airport}</p>
                 </div>
                 <br />
                 <div className='checkout-bag'>
@@ -39,26 +71,20 @@ const CheckoutComp = () => {
             <h2>Price Summary</h2>
             <br />
             <div className='checkout-price-travelers'>
-                <div className='checkout-price-traveler'>
-                    <p>Traveler 1</p>
-                    <p>$179.10</p>
-                </div>
-                <div className='checkout-price-traveler'>
-                    <p>Traveler 2</p>
-                    <p>$179.10</p>
-                </div>
-                <div className='checkout-price-traveler'>
-                    <p>Traveler 3</p>
-                    <p>$179.10</p>
-                </div>
+                {Array(seats).fill(true).map((item, index) => (
+                    <div className='checkout-price-traveler' key={index}>
+                        <p>Traveler {index + 1}</p>
+                        <p>${selectedFlight?.economy?.cost}</p>
+                    </div>
+                ))}
                 <hr></hr>
                 <div className='checkout-price-total'>
                     <h5>Trip total</h5>
-                    <h5>$537.30</h5>
+                    <h5>${total}</h5>
                 </div>
                 
             </div>
-            <button className='checkout-button'>Check out</button>
+            <button className='checkout-button' onClick={() => navigate(`/payment/${selectedFlight?._id}`)}>Check out</button>
         </div>
     </div>
   )

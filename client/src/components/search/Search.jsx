@@ -1,11 +1,37 @@
 import React, { useState } from 'react'
+import axios from 'axios';
+import { useContext } from 'react';
+import { SearchContext } from '../../context/SearchContext';
 import './search.css';
+import { useNavigate } from 'react-router-dom'
+import { SeatsContext } from '../../context/SeatsContext';
 
 const Search = () => {
-    const [search, setSearch] = useState({ origin: ' ', destination: ' ', date: ' ', seats: 1, category: 'Economy' });
+    const [search, setSearch] = useState({ origin: '', destination: '', date: '', seats: 1, category: 'economy' });
     const [count, setCount] = useState(search.seats);
+    const { searchDispatch } = useContext(SearchContext);
+    const { seatsDispatch } = useContext(SeatsContext);
+    const navigate = useNavigate();
 
     console.log(search);
+
+    const handleSearch = async() => {
+        try {
+            searchDispatch({ type: "SEARCH_START" });
+            seatsDispatch({ type: "SEARCH_START" });
+
+            const { data } = await axios.get(`/flight/search/${search.origin}/${search.destination}/${search.date}/${count}`);
+            searchDispatch({ type: "SEARCH_SUCCESS", payload: data });
+            seatsDispatch({ type: "SEATS_SUCCESS", payload: count });
+
+            navigate('/search');
+            
+        } catch(error) {
+            console.log(error);
+            searchDispatch({ type: "SEARCH_FAILURE", payload: error });
+            seatsDispatch({ type: "SEATS_FAILURE" });
+        }
+    }
   return (
     <>
     <div className='search_main'>
@@ -37,7 +63,7 @@ const Search = () => {
             </select>
         </div>
         <div className='search_field'>
-            <button className='search_button'>Search</button>
+            <button className='search_button' onClick={handleSearch}>Search</button>
         </div>
     </div>
     </>

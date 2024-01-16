@@ -37,6 +37,11 @@
     color: rgb(0, 0, 93);
 }
 
+a {
+    color: rgb(0, 0, 93);
+    text-decoration: none;
+}
+
 @media screen and (min-width: 768px) {
     .navbar_main {
         padding: 14px;

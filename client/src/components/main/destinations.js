@@ -13,70 +13,70 @@ export const destinations = [
     {
         id: 1,
         name: "Paris",
-        heading: "Experience Love",
+        heading: "Experience Joy",
         img: paris,
         rating: 4.5
     },
     {
         id: 2,
         name: "London",
-        heading: "Experience Love",
+        heading: "Experience Joy",
         img: london,
         rating: 4.5
     },
     {
         id: 3,
         name: "Dubai",
-        heading: "Experience Love",
+        heading: "Experience Joy",
         img: dubai,
         rating: 4.5
     },
     {
         id: 4,
         name: "Giza",
-        heading: "Experience Love",
+        heading: "Experience Joy",
         img: egypt,
         rating: 4.2
     },
     {
         id: 5,
         name: "New York",
-        heading: "Experience Love",
+        heading: "Experience Joy",
         img: newyork,
         rating: 4.5
     },
     {
         id: 6,
         name: "Maldives",
-        heading: "Experience Love",
+        heading: "Experience Joy",
         img: maldives,
         rating: 4.3
     },
     {
         id: 7,
         name: "Mumbai",
-        heading: "Experience Love",
+        heading: "Experience Joy",
         img: mumbai,
         rating: 4.3
     },
     {
         id: 8,
         name: "Sydney",
-        heading: "Experience Love",
+        heading: "Experience Joy",
         img: sydney,
         rating: 4.5
     },
     {
         id: 9,
         name: "Amsterdam",
-        heading: "Experience Love",
+        heading: "Experience Joy",
         img: amsterdam,
         rating: 4.6
     },
     {
         id: 10,
         name: "Hong Kong",
-        heading: "Experience Love",
+        heading: "Experience Joy",
         img: hongkong,
         rating: 4.4
     }

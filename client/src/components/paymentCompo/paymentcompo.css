@@ -82,7 +82,7 @@ label {
 
 .payment-card {
     width: calc(100% - 40px);
-    height: 54vh;
+    height: 62vh;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -106,6 +106,7 @@ label {
 img {
     height: 50px;
     width: 100px;
+    object-fit: contain;
 }
 
 .payment-traveler-gender {
@@ -123,7 +124,7 @@ img {
 }
 
 .payment-button {
-    width: calc(100% - 40px);
+    width: 50vw;
     border: none;
     height: 35px;
     background-color: blue;
@@ -141,9 +142,10 @@ img {
     }
     .payment-card {
         width: 70vw;
+        height: 62vh;
     }
     .payment-button {
-        width: 70vw;
+        width: 65vw;
     }
 }
 
@@ -157,10 +159,10 @@ img {
     }
     .payment-card {
         width: 50vw;
-        height: 52vh;
+        height: 60vh;
     }
     .payment-button {
-        width: 50vw;
+        width: 48vw;
         height: 40px;
     }
     .payment-input {

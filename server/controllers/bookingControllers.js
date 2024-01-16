@@ -5,7 +5,7 @@ import users from "../models/users.js";
 // ADMIN + LOGGED IN USER
 export const newBooking = async(req, res) => {
     const { flightId } = req.params;
-    const { firstName, lastName, email, passport, nationality, category } = req.body;
+    const { firstName, lastName, middleName, email, passport, gender, dob, category } = req.body;
     try {
         const f = await flights.findById(flightId);
         const airline = f.airline.split(' ');
@@ -16,8 +16,8 @@ export const newBooking = async(req, res) => {
             ref = `${airline[0][0]}${airline[1][0]}${date.getDate().toString()}${date.getMonth()}${date.getHours()}${date.getSeconds()}`;
         }
 
-        const createdBooking = new bookings({ firstName: firstName, lastName: lastName, 
-            email: email, passport: passport, nationality: nationality, flightId: flightId, category: category, reference: ref});
+        const createdBooking = new bookings({ firstName: firstName, lastName: lastName, middleName: middleName,
+            email: email, passport: passport, gender: gender, dob: dob, flightId: flightId, category: category, reference: ref});
 
         await createdBooking.save();
 

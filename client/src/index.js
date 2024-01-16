@@ -3,11 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { SearchContextProvider } from './context/SearchContext';
+import { SeatsContextProvider } from './context/SeatsContext';
+import { SelectedFlightProvider } from './context/SelectedFlightContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <SearchContextProvider>
+      <SeatsContextProvider>
+        <SelectedFlightProvider>
+            <App />
+        </SelectedFlightProvider>
+      </SeatsContextProvider>
+    </SearchContextProvider>
   </React.StrictMode>
 );
 

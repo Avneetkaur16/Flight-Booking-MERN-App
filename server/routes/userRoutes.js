@@ -12,7 +12,7 @@ router.post('/create', [
     check('lastName', 'Required').isLength({ min: 2, max: 65 }),
     check('username', 'Required').isLength({ min: 8, max: 16 }),
     check('email', 'Required').isEmail(),
-    check('password', 'Must be atleast 8 characters').isLength({ min: 8, max: 16 }).isAlphanumeric(),
+    check('password', 'Must be atleast 8 characters').isLength({ min: 8, max: 16 }),
 ], 
 validator, createUser)
 
@@ -22,7 +22,7 @@ router.put('/edit/:userId', [
     check('lastName', 'Required').isLength({ min: 2, max: 65 }),
     check('username', 'Required').isLength({ min: 8, max: 16 }),
     check('email', 'Required').isEmail(),
-    check('password', 'Must be atleast 8 characters').isLength({ min: 8, max: 16 }).isAlphanumeric()
+    check('password', 'Must be atleast 8 characters').isLength({ min: 8, max: 16 })
 ], validator, verifyUser, editUser)
 
 // DELETE

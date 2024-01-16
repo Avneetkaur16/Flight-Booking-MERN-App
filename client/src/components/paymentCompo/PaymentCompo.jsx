@@ -1,84 +1,121 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import './paymentcompo.css';
-import AmericanAirlinesLogo from '../../assets/AmericanAirlinesLogo.png';
+import axios from 'axios';
+import { SeatsContext } from '../../context/SeatsContext';
+import { SelectedFlightContext } from '../../context/SelectedFlightContext';
 
 const PaymentCompo = () => {
+  const { seats } = useContext(SeatsContext);
+  const { selectedFlight } = useContext(SelectedFlightContext);
+  console.log(selectedFlight)
+  const month = {
+    1: 'Jan',
+    2: 'Feb',
+    3: 'Mar',
+    4: 'Apr',
+    5: 'May',
+    6: 'Jun',
+    7: 'Jul',
+    8: 'Aug',
+    9: 'Sep',
+    10: 'Oct',
+    11: 'Nov',
+    12: 'Dec'
+  }
+    const date = selectedFlight?.origin?.date.slice(8, 10);
+    const monthNum = selectedFlight?.origin?.date.slice(5, 7);
+    const year = selectedFlight?.origin?.date.slice(0, 4);
+
+    const [travelers, setTravelers] = useState([]);
+    const [traveler, setTraveler] = useState({ firstName: '', lastName: '', middleName: '', email: '', passport: '', gender: '', dob: '' });
+    console.log(traveler);
+
+    const handleSave = (e) => {
+      e.preventDefault();
+      setTravelers(prev => [...prev, traveler]);
+      console.log(travelers);
+    }
+
+    console.log(travelers);
+
+    const handleBooking = (e) => {
+      e.preventDefault();
+      travelers.forEach(passenger => {
+        createBooking(passenger)
+      });
+    }
+
+    const createBooking = async(passenger) => {
+      try {
+        const { data } = await axios.post(`/booking/new/${selectedFlight._id}`, passenger);
+        console.log(data);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
   return (
     <div className='payment-main'>
       <div className='payment-pricelist'>
         <h3>Flight</h3>
-        <small>5 tickets</small>
+        <small>{seats} tickets</small>
         <hr></hr>
-        <h3>Dallas DFW to San Francisco SFO</h3>
-        <p>Sat, Jan 20 2023</p>
-        <p>4:53pm - 6:53pm</p>
-        <img src={AmericanAirlinesLogo} alt='airlineLogo' />
+        <h3>{selectedFlight?.origin?.city} {selectedFlight?.origin?.code} to {selectedFlight?.destination?.city} {selectedFlight?.destination?.code}</h3>
+        <p>{month[monthNum]} {date} {year}</p>
+        <p>{selectedFlight?.origin?.time} - {selectedFlight?.destination?.time}</p>
+        <img src={selectedFlight?.airlineLogo} alt='airlineLogo' />
         <br/>
         <hr></hr>
+
         <div className='payment-list'>
-          <div className='payment-list-item'>
-            <p>Traveler 1</p>
-            <p>$179.10</p>
+          {Array(seats).fill(true).map((item, index) => (
+            <div className='payment-list-item' key={index}>
+              <p>Traveler {index + 1}</p>
+              <p>${selectedFlight?.economy?.cost}</p>
           </div>
-          <div className='payment-list-item'>
-            <p>Traveler 2</p>
-            <p>$179.10</p>
-          </div>
-          <div className='payment-list-item'>
-            <p>Traveler 3</p>
-            <p>$179.10</p>
-          </div>
-          <div className='payment-list-item'>
-            <p>Traveler 4</p>
-            <p>$179.10</p>
-          </div>
-          <div className='payment-list-item'>
-            <p>Traveler 5</p>
-            <p>$179.10</p>
-          </div>
+          ))}
           <hr></hr>
           <br />
+
           <div className='payment-list-item'>
             <p style={{ fontWeight: '700' }}>Total</p>
-            <p style={{ fontWeight: '700' }}>$895.50</p>
+            <p style={{ fontWeight: '700' }}>${selectedFlight?.economy?.cost * seats}</p>
           </div>
         </div>
       </div>
+
       <div className='payment-travelers'>
         <h3> Who's traveling?</h3>
         <p style={{ color: 'gray' }}>Traveler names must match government-issued photo ID exactly.</p>
-        <div className='payment-traveler'>
-          <h4>Traveler 1</h4>
-          <div className='payment-traveler-name'>
-            <label htmlFor='first'>First Name</label>
-            <input className='payment-input' type='text' id='first' required />
-            <label htmlFor='middle'>Middle Name</label>
-            <input className='payment-input' type='text' id='middle' />
-            <label htmlFor='last'>Last Name</label>
-            <input className='payment-input' type='text' id='last' required />
-          </div>
-          <label htmlFor='email'>Email</label>
-          <input className='payment-input' id='email' type='email' placeholder='Email for confirmation' required />
-          <label htmlFor='country'>Country/Territory Code</label>
-          <select className='payment-input' id='country'>
-            <option id='unitedstates'>United States +1</option>
-            <option id='canada'>Canada +1</option>
-            <option id='unitedkingdom'>United Kingdom +44</option>
-            <option id='india'>India +91</option>
-          </select>
-          <label htmlFor='number'>Phone number</label>
-          <input className='payment-input' type='text' id='number' placeholder='In case we need to reach you' required />
-          <form className='payment-traveler-gender'>
+
+        {Array(seats).fill(true).map((item, index) => (
+          <form className='payment-traveler' key={index}>
+            <h4>Traveler {index + 1}</h4>
+            <div className='payment-traveler-name'>
+              <label htmlFor='first'>First Name</label>
+              <input className='payment-input' onChange={(e) => setTraveler({ ...traveler, firstName: e.target.value })} type='text' id='first' required />
+              <label htmlFor='middle'>Middle Name</label>
+              <input className='payment-input' onChange={(e) => setTraveler({ ...traveler, middleNameName: e.target.value })} type='text' id='middle' />
+              <label htmlFor='last'>Last Name</label>
+              <input className='payment-input' onChange={(e) => setTraveler({ ...traveler, lastName: e.target.value })} type='text' id='last' required />
+            </div>
+            <label htmlFor='email'>Email</label>
+            <input className='payment-input' onChange={(e) => setTraveler({ ...traveler, email: e.target.value })} id='email' type='email' placeholder='Email for confirmation' required />
+
+            <label htmlFor='number'>Passport No.</label>
+            <input className='payment-input' onChange={(e) => setTraveler({ ...traveler, passport: e.target.value })} type='text' id='number' placeholder='Passport' required />
             <p style={{ fontWeight: '600', color: 'rgb(50, 50, 50)' }}>Gender</p>
-            <input type='radio' id='male' value='Male' />
-            <label htmlFor='male'>Male</label>
-            <input type='radio' id='female' value='Female'/>
-            <label htmlFor='female'>Female</label>
+            <div className='payment-traveler-gender'>
+              <label><input type='radio' name='gender' value='Male' onChange={(e) => setTraveler({ ...traveler, gender: e.target.value })}></input>Male</label>
+              <label><input type='radio' name='gender' value='Female' onChange={(e) => setTraveler({ ...traveler, gender: e.target.value })}></input>Female</label>
+            </div>
+            <label htmlFor='date'>Date of Birth</label>
+            <input className='payment-input' onChange={(e) => setTraveler({ ...traveler, dob: e.target.value })} type='date' id='date' />
+            <button type='submit' onClick={handleSave}>Save</button>
           </form>
-          <label htmlFor='date'>Date of Birth</label>
-          <input className='payment-input' type='date' id='date' />
-        </div>
+        ))}
       </div>
+
       <div className='payment-card'>
         <h3>Complete Payment</h3>
         <br />
@@ -95,19 +132,37 @@ const PaymentCompo = () => {
               <option defaultValue>Month</option>
               <option>January</option>
               <option>February</option>
+              <option>March</option>
+              <option>April</option>
+              <option>May</option>
+              <option>June</option>
+              <option>July</option>
+              <option>August</option>
+              <option>September</option>
+              <option>October</option>
+              <option>November</option>
+              <option>December</option>
             </select>
             <select className='payment-input'>
               <option defaultValue>Year</option>
               <option>2024</option>
               <option>2025</option>
               <option>2026</option>
+              <option>2027</option>
+              <option>2028</option>
+              <option>2029</option>
+              <option>2030</option>
+              <option>2031</option>
+              <option>2032</option>
+              <option>2033</option>
+              <option>2024</option>
             </select>
           </div>
           <label htmlFor='code'>Security Code</label>
           <input className='payment-input' type='password' max={3} min={3} style={{ width: '100px' }} />
-        </form>
+          </form>
+          <button className='payment-button' onClick={handleBooking}>Complete Booking</button>
       </div>
-      <button className='payment-button'>Complete Booking</button>
     </div>
   )
 }

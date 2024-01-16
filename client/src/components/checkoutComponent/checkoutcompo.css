@@ -38,6 +38,7 @@
 .checkout-info-details-flight img {
     height: 40px;
     width: 70px;
+    object-fit: contain;
 }
 
 .checkout-info-details-flight-time {

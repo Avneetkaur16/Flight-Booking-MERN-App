@@ -1,0 +1,119 @@
+.register-main {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(239, 239, 239);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-logo {
+    width: calc(60vw - 60px);
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.register-container {
+    width: 65vw;
+    height: 82vh;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-radius: 25px;
+    padding: 30px;
+    gap: 5px;
+    line-height: 1.5;
+}
+
+.register-field {
+    height: 10vh;
+    width: calc(65vw - 60px);
+    display: flex;
+    flex-direction: column;
+}
+
+.register-field span {
+    display: none;
+    color: red;
+    font-size: 11px;
+}
+
+.register-field input:invalid ~ span {
+    display: block;
+}
+
+.register-field input:invalid {
+    border-color: red;
+}
+
+.register-container input {
+    height: 25px;
+    width: calc(65vw - 60px);
+    border: 1px solid rgb(182, 182, 182);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.register-button {
+    width: calc(65vw - 60px);
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(255, 55, 102);
+    color: white;
+    font-weight: 600;
+    margin: 10px 0 10px 0;
+}
+
+p {
+    cursor: pointer;
+}
+
+@media screen and (min-width: 768px){
+    .register-logo {
+        width: calc(40vw - 60px);
+        height: 12vh;
+        gap: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .register-logo img {
+        height: 70px;
+        width: 70px;
+    }
+    .register-container {
+        height: 75vh;
+        width: 45vw;
+    }
+    .register-container input {
+        width: calc(45vw - 60px);
+        height: 30px;
+        padding: 5px;
+    }
+    .register-button {
+        width: calc(45vw - 60px);
+        height: 35px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .register-logo {
+        display: flex;
+        justify-content: center;
+    }
+    .register-container {
+        width: 35vw;
+    }
+    .register-container input {
+        width: calc(35vw - 60px);
+    }
+    .register-button {
+        width: calc(35vw - 60px);
+    }
+}
